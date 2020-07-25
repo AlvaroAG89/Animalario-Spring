@@ -1,0 +1,48 @@
+
+/* Con este CSS ajustamos la ventana al movil */
+
+body {
+	background-color: #0CAAEA;
+	
+}
+
+#datos {
+	background-color: #FFFFFF;
+	position:relative;
+}
+
+
+
+@media screen and (max-width: 1024px){
+	html, body{
+	height: auto;
+	}
+	/* !important quita la prioridad a bootstrap y se la da a css*/
+	
+	#login{
+		width: 45% !important;
+		height: auto;
+	}
+	
+	#datos{
+		width: 80%;
+		left:10%;
+		height: auto;
+		margin-top:13%;
+		font-size: 300%;
+		padding:3%;
+	}
+	
+	input{
+		font-size: 120% !important;
+	}
+	
+	#licencia{
+		font-size:200%;
+	}
+	
+	#logo{
+		width:25% !important;
+		height:auto !important;
+	}
+}

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head th:replace="layout/layout :: head">
+
+
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
+
+
+<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+
+
+
+</head>
+
+<link rel="stylesheet" id="estiloFormulario" th:href="@{/css/estiloFormulario.css}"/>
+<script th:src="@{/js/comprobacion-movil/formulario-movil.js}"></script>
+<body>
+	
+	<header th:replace="layout/layout :: header"></header>
+
+	<div id="global" class="container py-4">
+		<div id="principal" class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+
+				<form th:action="@{/Jaulas/añadir/formulario}" th:object="${jaula}"
+					method="post" enctype="multipart/form-data" name ="formularioJaulas" id="formularioJaulas">
+					<div class="form-group row">
+
+						<div id="izquierdo" style="width: 50%;">
+							<div class="form-group row" style="margin-left: 10px;">
+								<label class="col-sm-2 col-form-label col-md-3">Jaula</label>
+								<div class="col-sm-6">
+									<input type="text" th:field="*{jaula}"
+										class="form-control"
+										th:errorclass="'form-control alert-danger'"
+										readonly="readonly" />
+								</div>
+							</div>
+
+							<div class="form-group row" style="margin-left: 10px;">
+								<label class="col-sm-2 col-form-label col-md-3">Nombres</label>
+								<div class="col-sm-6">
+									<input type="text" th:field="*{nombres}" class="form-control"
+										th:errorclass="'form-control alert-danger'" />
+									<small
+										class="form-text text-danger"
+										th:if="${#fields.hasErrors('nombres')}" th:errors="*{nombres}"></small>
+								</div>
+							</div>
+
+							<div class="form-group row" style="margin-left: 10px;">
+								<label class="col-sm-2 col-form-label col-md-3">Especie</label>
+								<div class="col-sm-6">
+									<input type="text" th:field="*{especie}" class="form-control"
+										th:errorclass="'form-control alert-danger'" /> <small
+										class="form-text text-danger"
+										th:if="${#fields.hasErrors('especie')}" th:errors="*{especie}"></small>
+								</div>
+							</div>
+
+							<div class="form-group row"  style="margin-left: 10px;">
+								<label class="col-sm-2 col-form-label col-md-3">Ratas
+									Hembra </label>
+								<div class="col-sm-6" id="bloqueRataHembra">
+									<input type="text" id="rataHembra" th:field="*{numRatasHembras}"
+										class="form-control"
+										th:errorclass="'form-control alert-danger'" /> 
+									<small
+										class="form-text text-danger" id="alertaRataHembra"
+										th:if="${#fields.hasErrors('numRatasHembras')}"
+										th:errors="*{numRatasHembras}"></small>
+									
+								</div>
+							</div>
+
+							<div class="form-group row" style="margin-left: 10px;">
+								<label class="col-sm-2 col-form-label col-md-3">Tipo
+									Rack</label>
+								<div class="col-sm-6">
+
+									<select th:field="*{tipo_jaula}"  class="form-control">
+									<option th:each="tipo:${listaRack}"
+										th:value="${tipo}"
+										th:text="${tipo}" />
+									
+									</select>
+									<small
+										class="form-text text-danger"
+										th:if="${#fields.hasErrors('tipo_jaula')}"
+										th:errors="*{tipo_jaula}"></small>
+								</div>
+							</div>
+
+							<div class="form-group row" style="margin-left: 10px;">
+								<label class="col-sm-2 col-form-label col-md-3">Fecha
+									Nacimiento</label>
+								<div class="col-sm-6">
+									<input type="text" th:field="*{fechaNacimiento}"
+										class="form-control"
+										th:errorclass="'form-control alert-danger'" />
+									<small
+										class="form-text text-danger"
+										th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></small>
+									
+								</div>
+							</div>
+
+							<div class="form-group row" style="margin-left: 10px;">
+								<label class="col-sm-2 col-form-label col-md-3">Procedimiento</label>
+								<div class="col-sm-6">
+									<input type="text" th:field="*{procedimiento}"
+										class="form-control"
+										th:errorclass="'form-control alert-danger'" />
+									<small
+										class="form-text text-danger"
+										th:if="${#fields.hasErrors('procedimiento')}" th:errors="*{procedimiento}"></small>
+								</div>
+							</div>
+						</div>
+
+
+						<div id="derecho" style="width: 50%;">
+							<div class="form-group row">
+								<label class="col-sm-2 col-form-label col-md-3">Laboratorio</label>
+								<div class="col-sm-6">
+									<input type="text" th:if="${role == 'ROLE_ADMIN'}"
+										th:field="*{laboratorio}" class="form-control"
+										th:errorclass="'form-control alert-danger'" />
+									<input
+										type="text" th:if="${role == 'ROLE_USER'}"
+										th:field="*{laboratorio}" class="form-control"
+										th:errorclass="'form-control alert-danger'"
+										readonly="readonly" />
+									<small
+										class="form-text text-danger"
+										th:if="${#fields.hasErrors('laboratorio')}" th:errors="*{laboratorio}"></small>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-sm-2 col-form-label col-md-3">Responsable</label>
+								<div class="col-sm-6">
+									<input type="text" th:if="${role == 'ROLE_ADMIN'}"
+										th:field="*{responsable}" class="form-control"
+										th:errorclass="'form-control alert-danger'" />
+									<input
+										type="text" th:if="${role == 'ROLE_USER'}"
+										th:field="*{responsable}" class="form-control"
+										th:errorclass="'form-control alert-danger'"
+										readonly="readonly" />
+									<small
+										class="form-text text-danger"
+										th:if="${#fields.hasErrors('responsable')}" th:errors="*{responsable}"></small>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-sm-2 col-form-label col-md-3">Cepa</label>
+								<div class="col-sm-6">
+									<input type="text" th:field="*{cepa}" class="form-control"
+										th:errorclass="'form-control alert-danger'" />
+									<small
+										class="form-text text-danger"
+										th:if="${#fields.hasErrors('cepa')}" th:errors="*{cepa}"></small>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-sm-2 col-form-label col-md-3">Ratas
+									Macho</label>
+								<div class="col-sm-6" id="bloqueRataMacho">
+									<input type="text" id="rataMacho" th:field="*{numRatasMacho}"
+										class="form-control"
+										th:errorclass="'form-control alert-danger'" />
+									<small 
+										class="form-text text-danger" id="alertaRataMacho"
+										th:if="${#fields.hasErrors('numRatasMacho')}" th:errors="*{numRatasMacho}"></small>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-sm-2 col-form-label col-md-3">Observaciones</label>
+								<div class="col-sm-6">
+									<input type="text" th:field="*{observaciones}"
+										class="form-control"
+										th:errorclass="'form-control alert-danger'" />
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<br>
+					<div class="form-group row" style="margin-left: 30%;">
+						<div id="opcion1" class="col-sm-4">
+							<input type="submit" value="Confirmar Jaula"
+								class="btn btn-secondary" id="AñadirJaula"/>
+						</div>
+						<div id="opcion2" class="col-sm-4">
+							<a th:href="@{/Jaulas/estante/A}"
+								class="btn btn-secondary btn-xs">Cancelar</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+	<script th:src="@{/js/validacion.js}"></script>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

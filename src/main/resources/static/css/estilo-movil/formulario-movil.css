@@ -1,0 +1,23 @@
+@media screen and (max-width: 1024px){
+	#principal{
+
+	}
+	
+	/*da margen de ampliar todo lo que permita el ancho*/
+	.container {
+    max-width: 3000px;
+}
+
+	#licencia{
+		font-size:200%;
+	}
+	
+	#logo{
+		width:25% !important;
+		height:auto !important;
+	}
+	
+	#credencial{
+		font-size:200%;
+	}
+}

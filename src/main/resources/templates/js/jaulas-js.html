@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
+</head>
+<body>
+
+	<script type="text/javascript" th:fragment="javascript">
+		$(document).ready(inicio);
+
+			var botonPulsado;
+			var ventanaAbierta = false;
+			
+			function inicio(){
+
+				if(ocupados != null){
+					pintar(ocupados, '#ef291c', "ok");
+				}
+				if(propios != null){
+					pintar(propios, '#33B8FF', "not")
+				}
+				
+		
+				
+				   //Ocultamos el menu al cargar la pagina
+		        $("#menu").hide();
+		         
+		        /* mostramos el menu si hacemos click izquierdo
+		        con el raton */
+		        $('table').on('click', 'button', function(e){
+		        	if(ventanaAbierta == false){
+			     		var colorBoton = $(this).css("background-color");
+			     		var colorHex = rgb2hex(colorBoton);
+			     		botonPulsado = $(this).text();
+			     		ventanaAbierta = true;
+			     	
+			     		if(colorHex == '#33b8ff'){
+			     			$("#VerModificar").css("display","block");
+			     			$("#Liberar").css("display","block");
+			     			$("#Añadir").css("display","none");
+			     		}else if(colorHex == '#00ff00'){
+			     			$("#VerModificar").css("display","none");
+			     			$("#Liberar").css("display","none");
+			     			$("#Añadir").css("display","block");
+			     		}
+		     		
+		      			if(e.pageX>=835){
+		      				$("#menu").css({'display':'block', 'left':e.pageX-160, 'top':e.pageY});
+		      			}else{
+		      				$("#menu").css({'display':'block', 'left':e.pageX, 'top':e.pageY-20});
+		      			}
+		              
+		              
+	     			//si la ventana ya esta abierta solo cierrala.
+		        	}else{
+		        		 $("#menu").css("display", "none");
+		                    ventanaAbierta = false;
+		        	}
+		              
+		              
+		              return false;
+		             
+		        });
+		         
+				//convertir rgb a colorhex
+				
+				var hexDigits = new Array
+		        ("0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f"); 
+				
+				function rgb2hex(rgb) {
+				 rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+				 return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+				}
+				
+				function hex(x) {
+				  return isNaN(x) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
+				 }
+		        
+		        //cuando hagamos click, el menu desaparecera
+		        $(document).click(function(e){
+		              if(e.button == 0){
+		                    $("#menu").css("display", "none");
+		                    ventanaAbierta = false;
+		              }
+		        });
+		         
+		        //si pulsamos escape, el menu desapareceru
+		        $(document).keydown(function(e){
+		              if(e.keyCode == 27){
+		                    $("#menu").css("display", "none");
+		                    ventanaAbierta = false;
+		              }
+		        });
+		         
+		        //controlamos los botones del menu
+		        $("#menu").click(function(e){
+		               
+		              // El switch utiliza los IDs de los <li> del menu
+		              switch(e.target.id){
+		                    case "Añadir":
+		                    	var URLactual = window.location.toString();
+		                    	var dominio = URLactual.slice(0,-17);
+		                    	var direccion = dominio+ "/Jaulas/añadir/formulario/"+botonPulsado;
+		                    	location.href=direccion;
+		                    	
+		                         // $(location).attr('href',"/Jaulas/añadir/formulario/"+botonPulsado);
+
+		                         break;      
+		                    case "VerModificar":
+		                    	var URLactual = window.location.toString();
+		                    	var dominio = URLactual.slice(0,-17);
+		                    	var direccion = dominio+ "/Jaulas/añadir/formulario/"+botonPulsado;
+		                    	location.href=direccion;
+
+		                    	break;
+		                    case "Liberar":
+		                    	  //$(location.hostname).attr('href',"/Jaulas/eliminar/"+botonPulsado);
+										                    	var URLactual = window.location.toString();
+		                    	var dominio = URLactual.slice(0,-17);
+		                    	var direccion = dominio+ "/Jaulas/eliminar/"+botonPulsado;
+		                    	location.href=direccion;
+		                          break;
+		              }
+		               
+		        });
+			}
+				
+			function pintar(array, color, permiso){
+				var miID = "A";
+				for(var i=1; i<=25;i++){
+					for(var j=0; j<array.length;j++){
+						if(i<10){
+							miID = "A0"+ i;
+						}else{
+							miID = "A" + i;
+						}
+						if(miID == array[j]){
+							let element = document.getElementById(i);
+							element.style.setProperty('Background-color', color);
+							if(permiso=="ok"){
+								$("#"+i).prop("disabled", true);
+							}
+							
+						}
+					}
+				}
+			}
+			
+
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+body {
+	width: 100%;
+	height: 100%;
+}
+
+
+@media screen and (max-width: 1024px){
+	body, #global{
+		width: 1014px !important;
+	}
+	
+	#licencia{
+		margin:0px auto;
+	}
+	
+	#menuSuperior{
+		width: auto !important;
+	}
+	
+	#principal{
+		/*position: absolute !important;*/
+		width: 1000px !important;
+		
+	}
+	
+	.col-sm-2 {
+	    max-width: 26.666667%;
+	    flex:none;
+	}
+	
+		.col-sm-6{
+		width: auto !important;
+	}
+	
+	/*deshabilitamos esta opcion para echar el panel a la izquierda*/
+	.container{
+		margin-left:unset;
+		/*maximo de ancho para los que tienen class container, osea los bootstrap*/
+		max-width: 2000px;
+	}
+}
+
+
+@media screen and (max-width: 576px){
+	body, #global{
+		max-width: 2000px !important;
+	}
+	
+	#menuSuperior{
+		width: auto !important;
+
+	}
+	
+	#principal{
+		/*position: absolute !important;*/
+		resize: none;
+		width: 1000px !important;
+	}
+	
+	.col-sm-2 {
+	    max-width: 26.666667%;
+	    flex:none;
+	}
+	
+	.col-sm-6{
+		width: auto !important;
+	}
+	
+	#opcion1, #opcion2{
+		width: auto;
+	}
+	
+
+}

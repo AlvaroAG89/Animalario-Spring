@@ -1,0 +1,70 @@
+table {
+	border: 1px solid #000;
+	margin: 0 auto;
+	width: 60%;
+	text-align: center;
+}
+
+#ratas {
+
+	background-color: #17f0f7;
+}
+
+button{
+	background-color: #00FF00;
+}
+
+ul {
+	list-style: none;
+	list-style-type: none;
+	list-style-position: outside;
+}
+
+li {
+	line-height: 30px;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+#menu {
+	width: 250px;
+	position: absolute;
+	border: 1px solid black;
+	-moz-box-shadow: 0 0 5px #888;
+	-webkit-box-shadow: 0 0 5px #888;
+	box-shadow: 0 0 5px #888;
+	background-color: white;
+}
+
+
+@media screen and (max-width: 900px){
+	#ratas{
+		
+		width:100% !important;
+		height:auto;
+		max-width: 100% !important;
+	
+	}
+	
+	#tabla{
+		margin-top: 10%;
+		width:100%;
+		height:50%;
+	}
+}
+
+
+@media screen and (max-width: 1000px){
+	#ratas{
+		
+		width:100% !important;
+		height:auto;
+		max-width: 100% !important;
+	
+	}
+	
+	#menu{
+		width: 400px !important;
+		height:150px !important;
+	}
+}
